@@ -14,8 +14,10 @@ if not os.path.exists(CSV_PATH):
     ], columns=["ID", "Kontrolle", "Beschreibung", "Status", "Kommentar", "Nachweis-Link"])
     df_init.to_csv(CSV_PATH, index=False)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST", "HEAD"])
 def index():
+    if request.method == "HEAD":
+        return "", 200
     df = pd.read_csv(CSV_PATH)
     if request.method == "POST":
         idx = int(request.form["row"])
