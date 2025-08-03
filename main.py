@@ -5,13 +5,12 @@ import os
 app = Flask(__name__)
 CSV_PATH = "data/controls.csv"
 
-# Stelle sicher, dass CSV existiert
 if not os.path.exists("data"):
     os.makedirs("data")
 if not os.path.exists(CSV_PATH):
     df_init = pd.DataFrame([
-        ["LOG-01", "Audit Logging aktiviert", "Logging muss aktiv sein", "offen", "", ""],
-        ["IAM-02", "Least Privilege", "Nur minimal nötige Rechte", "offen", "", ""]
+        ["LOG-01", "Audit Logging Enabled", "Das System muss sicherstellen, dass Audit-Logging für sicherheitsrelevante Ereignisse aktiv ist", "offen", "", ""],
+        ["LOG-02", "Log Storage and Protection", "Logs müssen vor unbefugtem Zugriff und Veränderung geschützt gespeichert werden", "offen", "", ""]
     ], columns=["ID", "Kontrolle", "Beschreibung", "Status", "Kommentar", "Nachweis-Link"])
     df_init.to_csv(CSV_PATH, index=False)
 
